@@ -42,14 +42,23 @@ class GameFinishedFragment : Fragment() {
             }
         }
         requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, callback)
+
+        binding.btnPlayAgain.setOnClickListener {
+            retryGame()
+        }
     }
 
 
     private fun parseArgs() {
-        gameResult = if (Build.VERSION.SDK_INT == Build.VERSION_CODES.TIRAMISU)
-            requireArguments().getSerializable(GAME_RESULT, GameResult::class.java) as GameResult
+        if (Build.VERSION.SDK_INT == Build.VERSION_CODES.TIRAMISU) {
+            requireArguments().getParcelable(GAME_RESULT, GameResult::class.java)?.let {
+                gameResult = it
+            }
+        }
         else
-            requireArguments().getSerializable(GAME_RESULT) as GameResult
+            requireArguments().getParcelable<GameResult>(GAME_RESULT)?.let {
+                gameResult = it
+            }
     }
 
     private fun retryGame() {
@@ -71,7 +80,7 @@ class GameFinishedFragment : Fragment() {
         fun newInstance(gameResult: GameResult): GameFinishedFragment {
             return GameFinishedFragment().apply {
                 arguments = Bundle().apply {
-                    putSerializable(GAME_RESULT, gameResult)
+                    putParcelable(GAME_RESULT, gameResult)
                 }
             }
         }

@@ -44,10 +44,14 @@ class GameFragment : Fragment() {
     }
 
     private fun parseArgs() {
-        level = if (Build.VERSION.SDK_INT == Build.VERSION_CODES.TIRAMISU)
-            requireArguments().getSerializable(GAME_LEVEL, Level::class.java) as Level
+        if (Build.VERSION.SDK_INT == Build.VERSION_CODES.TIRAMISU)
+            requireArguments().getParcelable(GAME_LEVEL, Level::class.java)?.let {
+                level = it
+            }
         else
-            requireArguments().getSerializable(GAME_LEVEL) as Level
+            requireArguments().getParcelable<Level>(GAME_LEVEL)?.let {
+                level = it
+            }
     }
 
     private fun launchGameFinishedFragment() {
@@ -76,7 +80,7 @@ class GameFragment : Fragment() {
         fun newInstance(level: Level): GameFragment {
             return GameFragment().apply {
                 arguments = Bundle().apply {
-                    putSerializable(GAME_LEVEL, level)
+                    putParcelable(GAME_LEVEL, level)
                 }
             }
         }
