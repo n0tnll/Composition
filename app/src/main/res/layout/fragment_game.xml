@@ -65,7 +65,6 @@
         android:background="@android:color/holo_green_light"
         app:layout_constraintBottom_toTopOf="@+id/tvOption4"
         app:layout_constraintEnd_toStartOf="@+id/tvOption2"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         tools:text="1" />
 
@@ -143,7 +142,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="32dp"
-        android:max="100"
+        android:secondaryProgress="70"
         app:layout_constraintBottom_toTopOf="@+id/tvOption2" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

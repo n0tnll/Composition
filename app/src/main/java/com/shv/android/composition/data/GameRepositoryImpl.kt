@@ -21,14 +21,14 @@ object GameRepositoryImpl : GameRepository {
         val rightAnswer = sum - visibleNumber
         options.add(rightAnswer)
         val from = max(rightAnswer - countOfOptions, MIN_VALUE_ANSWER)
-        val to = min(maxSumValue, rightAnswer - countOfOptions)
+        val to = min(maxSumValue, rightAnswer + countOfOptions)
 
         while (options.size < countOfOptions) {
             val option = Random.nextInt(from, to)
             options.add(option)
         }
 
-        return Question(sum, visibleNumber, options.toList())
+        return Question(sum, visibleNumber, options.toList().shuffled())
     }
 
     override fun getGameSettings(level: Level): GameSettings {
