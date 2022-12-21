@@ -38,7 +38,7 @@ class WelcomeFragment : Fragment() {
 
     private fun launchChoseLevelFragment() {
         requireActivity().supportFragmentManager.beginTransaction()
-            .replace(R.id.gameFragmentContainerView, ChoseLevelFragment.newInstance())
+            .replace(R.id.main_container, ChoseLevelFragment.newInstance())
             .addToBackStack(ChoseLevelFragment.NAME)
             .commit()
     }
