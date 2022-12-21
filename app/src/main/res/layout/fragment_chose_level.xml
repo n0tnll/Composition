@@ -1,44 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:layout_margin="16dp"
-    android:orientation="vertical">
+<layout>
 
-    <TextView
-        android:id="@+id/tvChoseLevelTitle"
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        android:layout_marginBottom="16dp"
-        android:text="@string/chose_level" />
+        android:layout_height="match_parent"
+        android:layout_margin="16dp"
+        android:orientation="vertical">
 
-    <Button
-        android:id="@+id/btnLevelTest"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/level_test" />
+        <TextView
+            android:id="@+id/tvChoseLevelTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:text="@string/chose_level"
+            android:textSize="24sp"
+            android:textStyle="bold" />
 
-    <Button
-        android:id="@+id/btnLevelEasy"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:backgroundTint="@android:color/holo_green_light"
-        android:text="@string/level_easy" />
+        <Button
+            android:id="@+id/btnLevelTest"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/level_test" />
 
-    <Button
-        android:id="@+id/btnLevelNormal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:backgroundTint="@android:color/holo_orange_light"
-        android:text="@string/level_normal" />
+        <Button
+            android:id="@+id/btnLevelEasy"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@android:color/holo_green_light"
+            android:text="@string/level_easy" />
 
-    <Button
-        android:id="@+id/btnLevelHard"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:backgroundTint="@android:color/holo_red_light"
-        android:text="@string/level_hard" />
+        <Button
+            android:id="@+id/btnLevelNormal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@android:color/holo_orange_light"
+            android:text="@string/level_normal" />
 
-</LinearLayout>
+        <Button
+            android:id="@+id/btnLevelHard"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@android:color/holo_red_light"
+            android:text="@string/level_hard" />
+
+    </LinearLayout>
+
+</layout>

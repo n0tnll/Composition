@@ -42,27 +42,28 @@ class GameFinishedFragment : Fragment() {
     }
 
     private fun showResult() {
+        binding.gameResult = args.gameResult
         with(binding) {
             val drawableImg = getResultImage(args.gameResult.winner)
             imResult.setImageResource(drawableImg)
 
-            val minCountOfRightAnswers = String.format(
-                getString(R.string.required_right_answers),
-                args.gameResult.gameSettings.minCountOfRightAnswers
-            )
-            tvRequiredAnswers.text = minCountOfRightAnswers
-
-            val yourCount = String.format(
-                getString(R.string.your_count),
-                args.gameResult.countOfRightAnswers
-            )
-            tvYourCount.text = yourCount
-
-            val requiredPercent = String.format(
-                getString(R.string.required_percent_right_answers),
-                args.gameResult.gameSettings.minPercentOfRightAnswers
-            )
-            tvRequiredPercentAnswers.text = requiredPercent
+//            val minCountOfRightAnswers = String.format(
+//                getString(R.string.required_right_answers),
+//                args.gameResult.gameSettings.minCountOfRightAnswers
+//            )
+//            tvRequiredAnswers.text = minCountOfRightAnswers
+//
+//            val yourCount = String.format(
+//                getString(R.string.your_count),
+//                args.gameResult.countOfRightAnswers
+//            )
+//            tvYourCount.text = yourCount
+//
+//            val requiredPercent = String.format(
+//                getString(R.string.required_percent_right_answers),
+//                args.gameResult.gameSettings.minPercentOfRightAnswers
+//            )
+//            tvRequiredPercentAnswers.text = requiredPercent
 
             val percentRightAnswers = String.format(
                 resources.getString(R.string.percent_right_answers),
