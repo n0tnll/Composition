@@ -1,16 +1,12 @@
 package com.shv.android.composition.presentation
 
-import android.graphics.drawable.Drawable
-import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.activity.OnBackPressedCallback
-import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import com.shv.android.composition.R
 import com.shv.android.composition.databinding.FragmentGameFinishedBinding
 import com.shv.android.composition.domain.entity.GameResult
@@ -22,12 +18,7 @@ class GameFinishedFragment : Fragment() {
     private val binding: FragmentGameFinishedBinding
         get() = _binding ?: throw RuntimeException("FragmentGameFinishedBinding == null")
 
-    private lateinit var gameResult: GameResult
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        parseArgs()
-    }
+    private val args by navArgs<GameFinishedFragmentArgs>()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -50,38 +41,26 @@ class GameFinishedFragment : Fragment() {
         }
     }
 
-
-    private fun parseArgs() {
-        if (Build.VERSION.SDK_INT == Build.VERSION_CODES.TIRAMISU) {
-            requireArguments().getParcelable(GAME_RESULT, GameResult::class.java)?.let {
-                gameResult = it
-            }
-        } else
-            requireArguments().getParcelable<GameResult>(GAME_RESULT)?.let {
-                gameResult = it
-            }
-    }
-
     private fun showResult() {
         with(binding) {
-            val drawableImg = getResultImage(gameResult.winner)
+            val drawableImg = getResultImage(args.gameResult.winner)
             imResult.setImageResource(drawableImg)
 
             val minCountOfRightAnswers = String.format(
                 getString(R.string.required_right_answers),
-                gameResult.gameSettings.minCountOfRightAnswers
+                args.gameResult.gameSettings.minCountOfRightAnswers
             )
             tvRequiredAnswers.text = minCountOfRightAnswers
 
             val yourCount = String.format(
                 getString(R.string.your_count),
-                gameResult.countOfRightAnswers
+                args.gameResult.countOfRightAnswers
             )
             tvYourCount.text = yourCount
 
             val requiredPercent = String.format(
                 getString(R.string.required_percent_right_answers),
-                gameResult.gameSettings.minPercentOfRightAnswers
+                args.gameResult.gameSettings.minPercentOfRightAnswers
             )
             tvRequiredPercentAnswers.text = requiredPercent
 
@@ -94,7 +73,7 @@ class GameFinishedFragment : Fragment() {
     }
 
     private fun getPercentOfRightAnswers() =
-        gameResult.countOfRightAnswers / gameResult.countOfQuestions.toDouble() * 100
+        args.gameResult.countOfRightAnswers / args.gameResult.countOfQuestions.toDouble() * 100
 
     private fun getResultImage(winState: Boolean): Int {
         return if (winState)
@@ -110,18 +89,5 @@ class GameFinishedFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
-    }
-
-    companion object {
-
-        const val GAME_RESULT = "game_result"
-
-        fun newInstance(gameResult: GameResult): GameFinishedFragment {
-            return GameFinishedFragment().apply {
-                arguments = Bundle().apply {
-                    putParcelable(GAME_RESULT, gameResult)
-                }
-            }
-        }
     }
 }

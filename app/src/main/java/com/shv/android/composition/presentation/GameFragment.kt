@@ -11,6 +11,7 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import com.shv.android.composition.R
 import com.shv.android.composition.databinding.FragmentGameBinding
 import com.shv.android.composition.domain.entity.GameResult
@@ -22,10 +23,10 @@ class GameFragment : Fragment() {
     private val binding: FragmentGameBinding
         get() = _binding ?: throw RuntimeException("FragmentGameBinding == null")
 
-    private lateinit var level: Level
+    private val args by navArgs<GameFragmentArgs>()
 
     private val gameViewModelFactory: GameViewModelFactory by lazy {
-        GameViewModelFactory(requireActivity().application, level)
+        GameViewModelFactory(requireActivity().application, args.level)
     }
 
     private val gameViewModel: GameViewModel by lazy {
@@ -43,11 +44,6 @@ class GameFragment : Fragment() {
                 add(tvOption6)
             }
         }
-    }
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        parseArgs()
     }
 
     override fun onCreateView(
@@ -126,41 +122,14 @@ class GameFragment : Fragment() {
         return ContextCompat.getColor(requireContext(), colorResId)
     }
 
-    private fun parseArgs() {
-        if (Build.VERSION.SDK_INT == Build.VERSION_CODES.TIRAMISU)
-            requireArguments().getParcelable(GAME_LEVEL, Level::class.java)?.let {
-                level = it
-            }
-        else
-            requireArguments().getParcelable<Level>(GAME_LEVEL)?.let {
-                level = it
-            }
-    }
-
     private fun launchGameFinishedFragment(gameResult: GameResult) {
-        val args = Bundle().apply {
-            putParcelable(GameFinishedFragment.GAME_RESULT, gameResult)
-        }
-        findNavController().navigate(R.id.action_gameFragment_to_gameFinishedFragment, args)
+        findNavController().navigate(
+            GameFragmentDirections.actionGameFragmentToGameFinishedFragment(gameResult)
+        )
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
-    }
-
-    companion object {
-
-        const val GAME_LEVEL = "game_level"
-        const val NAME = "GameFragment"
-
-        fun newInstance(level: Level): GameFragment {
-            return GameFragment().apply {
-                arguments = Bundle().apply {
-                    putParcelable(GAME_LEVEL, level)
-                }
-            }
-        }
-
     }
 }
