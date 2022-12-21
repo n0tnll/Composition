@@ -20,6 +20,7 @@
             android:layout_height="0dp"
             android:layout_margin="48dp"
             android:contentDescription="@string/game_over_description"
+            app:imageResult="@{gameResult.winner}"
             app:layout_constraintBottom_toTopOf="@id/tvRequiredAnswers"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -33,12 +34,13 @@
             android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"
-            android:text="@{gameResult.gameSettings.minCountOfRightAnswersString}"
+            app:requiredAnswers="@{gameResult.gameSettings.minCountOfRightAnswers}"
             app:layout_constraintBottom_toTopOf="@+id/tvYourCount"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_chainStyle="packed" />
+            app:layout_constraintVertical_chainStyle="packed"
+            tools:text="@string/required_right_answers"/>
 
         <TextView
             android:id="@+id/tvYourCount"
@@ -47,11 +49,12 @@
             android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"
-            android:text="@{gameResult.countOfRightAnswersString}"
+            app:yourCount="@{gameResult.countOfRightAnswers}"
             app:layout_constraintBottom_toTopOf="@+id/tvRequiredPercentAnswers"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvRequiredAnswers" />
+            app:layout_constraintTop_toBottomOf="@+id/tvRequiredAnswers"
+            tools:text="@string/your_count"/>
 
         <TextView
             android:id="@+id/tvRequiredPercentAnswers"
@@ -60,11 +63,12 @@
             android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"
-            android:text="@{gameResult.gameSettings.minPercentOfRightAnswersString}"
+            app:requiredPercentAnswers="@{gameResult.gameSettings.minPercentOfRightAnswers}"
             app:layout_constraintBottom_toTopOf="@+id/tvPercentRightAnswers"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvYourCount" />
+            app:layout_constraintTop_toBottomOf="@+id/tvYourCount"
+            tools:text="@string/required_percent_right_answers"/>
 
         <TextView
             android:id="@+id/tvPercentRightAnswers"
@@ -73,11 +77,13 @@
             android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"
-            android:text="@string/percent_right_answers"
+            app:percentRightAnswers="@{gameResult}"
             app:layout_constraintBottom_toTopOf="@+id/btnPlayAgain"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvRequiredPercentAnswers" />
+            app:layout_constraintTop_toBottomOf="@+id/tvRequiredPercentAnswers"
+            tools:text="@string/percent_right_answers"
+            />
 
         <Button
             android:id="@+id/btnPlayAgain"
